@@ -26,39 +26,61 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
+| Column        | Type    | Options     |
+| ------------- | ------- | ----------- |
+| nickname      | string  | null: false |
+| email         | string  | null: false |
+| password      | string  | null: false |
+| name          | string  | null: false |
+| katakana_name | string  | null: false |
+| birth         | date    | null: false |
 
 ### Association
 
-- has_many :things
+- has_many :items
+- belongs_to :purchase history
 
 
-## things テーブル
+## items テーブル
 
-| Column      | Type    | Options     |
-| ----------- | ------- | ----------- |
-| user_name   | string  | null: false |
-| item_name   | string  | null: false |
-| price       | integer | null: false |
-
-### Association
-
-- belongs_to :users
-
-## purchasers テーブル
-
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| purchaser  | string     | null: false                    |
-| purchase   | string     | null: false                    |
-| address    | string     | null: false                    |
+| Column            | Type    | Options     |
+| ----------------- | ------- | ----------- |
+| item_name         | string  | null: false |
+| item_content      | string  | null: false |
+| category_id       | integer | null: false |
+| item_status_id    | integer | null: false |
+| delivery_pay_id   | integer | null: false |
+| delivery_area_id  | integer | null: false |
+| delivery_day_id   | integer | null: false |
+| price             | integer | null: false |
 
 ### Association
 
 - belongs_to :users
-- belongs_to :things
+- belongs_to :purchase history
 
+## purchase history テーブル
+
+| Column     | Type       | Options       |
+| ---------- | ---------- | ------------- |
+| user_name  | string     | null: false   |
+| item_name  | string     | null: false   |
+
+### Association
+
+- belongs_to :users
+- belongs_to :items
+- belongs_to :address
+
+## address テーブル
+
+| Column         | Type    | Options       |
+| -------------- | ------- | ------------- |
+| postcode       | integer | null: false   |
+| prefecture_id  | integer | null: false   |
+| address        | string  | null: false   |
+| building       | string  | null: false   |
+
+### Association
+
+- belongs_to :purchase history
