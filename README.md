@@ -45,16 +45,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column            | Type    | Options     |
-| ----------------- | ------- | ----------- |
-| name              | string  | null: false |
-| content           | string  | null: false |
-| category_id       | integer | null: false |
-| item_status_id    | integer | null: false |
-| delivery_pay_id   | integer | null: false |
-| delivery_area_id  | integer | null: false |
-| delivery_day_id   | integer | null: false |
-| price             | integer | null: false |
+| Column            | Type    | Options                        |
+| ----------------- | ------- | ------------------------------ |
+| name              | string  | null: false                    |
+| content           | string  | null: false                    |
+| category_id       | integer | null: false                    |
+| item_status_id    | integer | null: false                    |
+| delivery_pay_id   | integer | null: false                    |
+| delivery_area_id  | integer | null: false                    |
+| delivery_day_id   | integer | null: false                    |
+| price             | integer | null: false                    |
+| user_id           | integer | null: false, foreign_key: true |
 
 ### Association
 
@@ -63,10 +64,10 @@ Things you may want to cover:
 
 ## purchase_history テーブル
 
-| Column     | Type       | Options       |
-| ---------- | ---------- | ------------- |
-| user_id    | integer    | null: false   |
-| item_id    | integer    | null: false   |
+| Column     | Type       | Options                          |
+| ---------- | ---------- | -------------------------------- |
+| user_id    | integer    | null: false, foreign_key: true   |
+| item_id    | integer    | null: false, foreign_key: true   |
 
 ### Association
 
@@ -76,12 +77,13 @@ Things you may want to cover:
 
 ## address テーブル
 
-| Column         | Type    | Options       |
-| -------------- | ------- | ------------- |
-| postcode       | integer | null: false   |
-| prefecture_id  | integer | null: false   |
-| address        | string  | null: false   |
-| building       | string  | null: false   |
+| Column              | Type    | Options                       |
+| ------------------- | ------- | ----------------------------- |
+| postcode            | string  | null: false                   |
+| prefecture_id       | integer | null: false                   |
+| address             | string  | null: false                   |
+| building            | string  | null: false                   |
+| purchase_history_id | integer | null:false, foreign_key: true |
 
 ### Association
 
