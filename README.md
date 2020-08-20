@@ -26,27 +26,29 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| nickname      | string  | null: false |
-| email         | string  | null: false |
-| password      | string  | null: false |
-| name          | string  | null: false |
-| katakana_name | string  | null: false |
-| birth         | date    | null: false |
+| Column              | Type    | Options     |
+| ------------------- | ------- | ----------- |
+| nickname            | string  | null: false |
+| email               | string  | null: false |
+| password            | string  | null: false |
+| last_name           | string  | null: false |
+| first_name          | string  | null: false |
+| katakana_last_name  | string  | null: false |
+| katakana_first_name | string  | null: false |
+| birth               | date    | null: false |
 
 ### Association
 
 - has_many :items
-- belongs_to :purchase history
+- has_many :purchase_histories
 
 
 ## items テーブル
 
 | Column            | Type    | Options     |
 | ----------------- | ------- | ----------- |
-| item_name         | string  | null: false |
-| item_content      | string  | null: false |
+| name              | string  | null: false |
+| content           | string  | null: false |
 | category_id       | integer | null: false |
 | item_status_id    | integer | null: false |
 | delivery_pay_id   | integer | null: false |
@@ -56,21 +58,21 @@ Things you may want to cover:
 
 ### Association
 
-- belongs_to :users
-- belongs_to :purchase history
+- belongs_to :user
+- has_one :purchase_history
 
-## purchase history テーブル
+## purchase_history テーブル
 
 | Column     | Type       | Options       |
 | ---------- | ---------- | ------------- |
-| user_name  | string     | null: false   |
-| item_name  | string     | null: false   |
+| user_id    | integer    | null: false   |
+| item_id    | integer    | null: false   |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
-- belongs_to :address
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
 ## address テーブル
 
@@ -83,4 +85,4 @@ Things you may want to cover:
 
 ### Association
 
-- belongs_to :purchase history
+- belongs_to :purchase_history
