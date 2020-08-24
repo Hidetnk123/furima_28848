@@ -78,6 +78,27 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name 全角（漢字・ひらがな・カタカナ）で記入お願いします")
       end
+
+      it "katakana_last_nameが空だと登録できない" do
+        @user.katakana_last_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Katakana last name can't be blank")
+      end
+      it "katakana_last_nameが全角（カタカナ）でないと登録できない" do
+        @user.katakana_last_name = "lastname"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Katakana last name 全角（カタカナ）で記入お願いします")
+      end
+      it "katakana_first_nameが空だと登録できない" do
+        @user.katakana_first_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Katakana first name can't be blank")
+      end
+      it "katakana_first_nameが全角（カタカナ）でないと登録できない" do
+        @user.katakana_first_name = "firstname"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Katakana first name 全角（カタカナ）で記入お願いします")
+      end
     end
   end
 end
