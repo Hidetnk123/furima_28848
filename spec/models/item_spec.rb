@@ -59,6 +59,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery pay can't be blank", "Delivery pay is not a number")
       end
+      it "delivery_pay_idが、id = 1の場合に出品できない" do
+        @item.delivery_pay_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery pay must be other than 1")
+      end
+      
       it "delivery_area_idが存在しないと出品できない" do
         @item.delivery_area_id = nil
         @item.valid?
