@@ -48,6 +48,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item status can't be blank", "Item status is not a number")
       end
+      it "item_status_idが、id = 1の場合に出品できない" do
+        @item.item_status_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item status must be other than 1")
+      end
+
       it "delivery_pay_idが存在しないと出品できない" do
         @item.delivery_pay_id = nil
         @item.valid?
