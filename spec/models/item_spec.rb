@@ -81,6 +81,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery day can't be blank", "Delivery day is not a number")
       end
+      it "delivery_day_idが、id = 1の場合に出品できない" do
+        @item.delivery_day_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery day must be other than 1")
+      end
+
       it "priceが存在しないと出品できない" do
         @item.price  = nil
         @item.valid?
