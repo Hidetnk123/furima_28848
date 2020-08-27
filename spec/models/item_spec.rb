@@ -19,21 +19,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
+
       it "nameが存在しないと出品できない" do
         @item.name = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
+
       it "contentが存在しないと出品できない" do
         @item.content = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Content can't be blank")
       end
+
       it "category_idが存在しないと出品できない" do
         @item.category_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
       end
+      it "category_idが、id = 1の場合に出品できない" do
+        @item.category_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+
       it "item_status_idが存在しないと出品できない" do
         @item.item_status_id = nil
         @item.valid?
