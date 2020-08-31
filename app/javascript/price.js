@@ -1,6 +1,6 @@
 window.addEventListener('load', function(){
     const price = document.getElementById("item-price");
-   
+
     price.addEventListener('keyup', function(){
       let input_price = price.value;
       let tax = document.getElementById("add-tax-price");
