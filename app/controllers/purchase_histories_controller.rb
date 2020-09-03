@@ -1,11 +1,11 @@
 class PurchaseHistoriesController < ApplicationController
+  before_action :purchase_item, only: [:index, :create]
+
   def index
-    @item = Item.find(params[:item_id])
     @purchase_history = PurchaseAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_history = PurchaseAddress.new(purchase_history_params)
     if @purchase_history.valid?
       pay_item
@@ -18,6 +18,10 @@ class PurchaseHistoriesController < ApplicationController
 
   private
 
+  def purchase_item
+    @item = Item.find(params[:item_id])
+  end
+  
   def purchase_history_params
     params.require(:purchase_address).permit(:postcode, :prefecture_id, :city, :address, 
                                              :building, :token, :tel).merge(user_id: current_user.id, item_id: @item.id)
