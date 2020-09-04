@@ -41,6 +41,12 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Prefecture must be other than 1")
         end
+
+        it "cityが存在しないと出品できない" do
+          @purchase_address.city = nil
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("City can't be blank")
+        end
       end
     end
 end
