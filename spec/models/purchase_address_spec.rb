@@ -18,6 +18,18 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
         end
+
+        it "postcodeが存在しないと購入できない" do
+          @purchase_address.postcode = nil
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Postcode can't be blank")
+        end
+
+        it "postcodeのハイフン（-）がないと購入できない" do
+          @purchase_address.postcode = "1234567"
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
+        end
       end
     end
 end
