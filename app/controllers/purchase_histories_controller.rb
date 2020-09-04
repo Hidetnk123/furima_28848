@@ -2,11 +2,12 @@ class PurchaseHistoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index, only: [:index, :create]
   before_action :purchase_item, only: [:index, :create]
+  before_action :item_index, only: [:index, :create]
 
   def index
     @purchase_history = PurchaseAddress.new
   end
-
+  
   def create
     @purchase_history = PurchaseAddress.new(purchase_history_params)
     if @purchase_history.valid?
@@ -32,6 +33,12 @@ class PurchaseHistoriesController < ApplicationController
   def move_to_index
     @item = Item.find(params[:item_id])
     if @item.user.id == current_user.id
+        redirect_to root_path
+    end
+  end
+
+  def item_index
+    if @item.purchase_history.present?
         redirect_to root_path
     end
   end
