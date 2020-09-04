@@ -1,4 +1,5 @@
 class PurchaseHistoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :purchase_item, only: [:index, :create]
 
   def index
@@ -21,7 +22,7 @@ class PurchaseHistoriesController < ApplicationController
   def purchase_item
     @item = Item.find(params[:item_id])
   end
-  
+
   def purchase_history_params
     params.require(:purchase_address).permit(:postcode, :prefecture_id, :city, :address, 
                                              :building, :token, :tel).merge(user_id: current_user.id, item_id: @item.id)
