@@ -59,8 +59,8 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Tel can't be blank", "Tel is invalid")
         end
-        it "telが存在しないと出品できない" do
-          @purchase_address.tel = "123456789123"
+        it "電話番号にハイフンがあると出品できない" do
+          @purchase_address.tel = "123-4567-8912"
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Tel is invalid")
         end
