@@ -54,3 +54,4 @@ class PurchaseHistoriesController < ApplicationController
   end
  
 end
+
