@@ -2,7 +2,11 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
   document.addEventListener('DOMContentLoaded', function(){
     const imageList = document.getElementById('item-image');
     document.getElementById('items_image').addEventListener('change', function(e){
-      
+      // 画像が表示されている場合のみ、すでに存在している画像を削除する
+      const imageContent = document.querySelector('img');
+      if (imageContent){
+        imageContent.remove();
+      }
       const file = e.target.files[0];
       const blob = window.URL.createObjectURL(file);
 
