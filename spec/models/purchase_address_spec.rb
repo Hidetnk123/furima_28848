@@ -16,53 +16,53 @@ RSpec.describe PurchaseAddress, type: :model do
         it "tokenが存在しないと購入できない" do
           @purchase_address.token = nil
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+          expect(@purchase_address.errors.full_messages).to include("カード情報を入力してください")
         end
 
         it "postcodeが存在しないと購入できない" do
           @purchase_address.postcode = nil
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Postcode can't be blank")
+          expect(@purchase_address.errors.full_messages).to include("郵便番号を入力してください")
         end
 
         it "postcodeのハイフン（-）がないと購入できない" do
           @purchase_address.postcode = "1234567"
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
+          expect(@purchase_address.errors.full_messages).to include("郵便番号は不正な値です")
         end
 
         it "prefecture_idが存在しないと出品できない" do
           @purchase_address.prefecture_id = nil
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
+          expect(@purchase_address.errors.full_messages).to include("都道府県を入力してください")
         end
         it "prefecture_idが、id = 1の場合に出品できない" do
           @purchase_address.prefecture_id = "1"
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Prefecture must be other than 1")
+          expect(@purchase_address.errors.full_messages).to include("都道府県は1以外の値にしてください")
         end
 
         it "cityが存在しないと出品できない" do
           @purchase_address.city = nil
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("City can't be blank")
+          expect(@purchase_address.errors.full_messages).to include("市区町村を入力してください")
         end
 
         it "addressが存在しないと出品できない" do
           @purchase_address.address = nil
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Address can't be blank")
+          expect(@purchase_address.errors.full_messages).to include("番地を入力してください")
         end
 
         it "telが存在しないと出品できない" do
           @purchase_address.tel = nil
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Tel can't be blank", "Tel is invalid")
+          expect(@purchase_address.errors.full_messages).to include("電話番号を入力してください")
         end
         it "電話番号にハイフンがあると出品できない" do
           @purchase_address.tel = "123-4567-8912"
           @purchase_address.valid?
-          expect(@purchase_address.errors.full_messages).to include("Tel is invalid")
+          expect(@purchase_address.errors.full_messages).to include("電話番号は不正な値です")
         end
       end
     end
