@@ -41,6 +41,11 @@ class ItemsController < ApplicationController
   def show
   end
 
+  def search
+    @items = Item.search(params[:keyword])
+    # @results = @p.result.includes(:category)  # 検索条件にマッチした商品の情報を取得
+  end
+
   private
 
   def item_params
@@ -53,4 +58,11 @@ class ItemsController < ApplicationController
   def item_set
     @item = Item.find(params[:id])
   end
+
+  private
+
+  # def search_product
+    # @p = Product.ransack(params[:q])  # 検索オブジェクトを生成
+  # end
+
 end
